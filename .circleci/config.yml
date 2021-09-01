@@ -1,0 +1,17 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  # https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md
+  path-filtering: circleci/path-filtering@0.0.2
+
+workflows:
+  setup-workflow:
+    jobs:
+      - path-filtering/filter:
+          base-revision: origin/master
+          config-path: .circleci/setup-workflow-config.yml
+          mapping: |
+            app1/.* app1 true
+            app2/.* app2 true
