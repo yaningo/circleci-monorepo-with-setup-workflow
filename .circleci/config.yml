@@ -20,11 +20,14 @@ workflows:
           mapping: |
             app1/.* app1 true
 #           base-revision: origin/master
-      
-      - second-setup
-      
+            
       - path-filtering/filter:
           config-path: .circleci/app2.yml
           mapping: |
             app2/.* app2 true
 #           base-revision: origin/master
+
+  setup-follow:
+    jobs:
+      # multiple configs for setup-workflow cause {"message":"Pipeline is not in setup state."} error
+      - second-setup
