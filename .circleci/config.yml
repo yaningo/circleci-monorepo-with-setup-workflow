@@ -19,4 +19,4 @@ workflows:
       - path-filtering/filter:
           config-path: .circleci/setup-workflow-config.yml
           mapping: |
-            app2/.* app2 true
+            app2/.* app2 false
