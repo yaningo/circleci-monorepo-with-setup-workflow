@@ -6,6 +6,14 @@ orbs:
   # https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md
   path-filtering: circleci/path-filtering@0.0.2
 
+
+jobs:
+  second-setup:
+    executor: path-filtering/default
+
+    steps:
+      - run: curl -X 'https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline'
+
 workflows:
   setup-workflow:
     jobs:
@@ -15,8 +23,8 @@ workflows:
           mapping: |
             app1/.* app1 true
 #           base-revision: origin/master
-
-      - run: curl -X "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline" -H "Circle-Token: $MYTOK"
+      
+      - second-setup
       
       - path-filtering/filter:
           config-path: .circleci/app2.yml
