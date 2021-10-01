@@ -1,33 +1,17 @@
+version: 2.1
+
+setup: true
+
 orbs:
   # https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md
   path-filtering: circleci/path-filtering@0.0.2
 
-
-jobs:
-  second-setup:
-    executor: path-filtering/default
-
-    steps:
-      - run: |
-          curl -X POST "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline" -H "Circle-Token: $MYTOK"
-
 workflows:
   setup-workflow:
     jobs:
-      # multiple configs for setup-workflow cause {"message":"Pipeline is not in setup state."} error
       - path-filtering/filter:
-          config-path: .circleci/app1.yml
+          base-revision: origin/master
+          config-path: .circleci/setup-workflow-config.yml
           mapping: |
             app1/.* app1 true
-#           base-revision: origin/master
-            
-      - path-filtering/filter:
-          config-path: .circleci/app2.yml
-          mapping: |
             app2/.* app2 true
-#           base-revision: origin/master
-
-  setup-follow:
-    jobs:
-      # multiple configs for setup-workflow cause {"message":"Pipeline is not in setup state."} error
-      - second-setup
