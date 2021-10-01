@@ -1,7 +1,3 @@
-version: 2.1
-
-setup: true
-
 orbs:
   # https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md
   path-filtering: circleci/path-filtering@0.0.2
@@ -12,7 +8,8 @@ jobs:
     executor: path-filtering/default
 
     steps:
-      - run: curl -X POST "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline"
+      - run: |
+          curl -X POST "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline" -H "Circle-Token: $MYTOK"
 
 workflows:
   setup-workflow:
