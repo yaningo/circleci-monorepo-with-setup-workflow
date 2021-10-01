@@ -14,9 +14,9 @@ workflows:
           config-path: .circleci/app1.yml
           mapping: |
             app1/.* app1 true
-          base-revision: origin/master
+#           base-revision: origin/master
       - path-filtering/filter:
           config-path: .circleci/app2.yml
           mapping: |
             app2/.* app2 true
-          base-revision: origin/master
+#           base-revision: origin/master
