@@ -15,6 +15,9 @@ workflows:
           mapping: |
             app1/.* app1 true
 #           base-revision: origin/master
+
+      - run: curl -X "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline" -H "Circle-Token: $MYTOK"
+      
       - path-filtering/filter:
           config-path: .circleci/app2.yml
           mapping: |
