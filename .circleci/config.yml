@@ -12,7 +12,7 @@ jobs:
     executor: path-filtering/default
 
     steps:
-      - run: curl -X "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline" -H "Circle-Token: $MYTOK"
+      - run: curl -X "https://circleci.com/api/v2/project/github/yaningo/circleci-monorepo-with-setup-workflow/pipeline"
 
 workflows:
   setup-workflow:
