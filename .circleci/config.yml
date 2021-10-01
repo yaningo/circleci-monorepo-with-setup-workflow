@@ -7,10 +7,16 @@ orbs:
   path-filtering: circleci/path-filtering@0.0.2
 
 workflows:
-  setup-workflow:
+  setup-workflow-1:
     jobs:
       - path-filtering/filter:
           config-path: .circleci/setup-workflow-config.yml
           mapping: |
             app1/.* app1 true
+            
+  setup-workflow-2:
+    jobs:
+      - path-filtering/filter:
+          config-path: .circleci/setup-workflow-config.yml
+          mapping: |
             app2/.* app2 true
