@@ -1,38 +1,22 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-parameters:
-  app1:
-    type: boolean
-    default: false
-  app2:
-    type: boolean
-    default: false
+setup: true
 
-# See https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  job1:
-    docker: # executor type
-      - image: buildpack-deps:trusty # primary container will run Ubuntu Trusty
-    steps:
-      - run:
-          name: list files
-          command: ls -l
-  job2:
-    docker: # executor type
-      - image: buildpack-deps:trusty # primary container will run Ubuntu Trusty
-    steps:
-      - run:
-          name: list files
-          command: ls -l
+orbs:
+  # https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md
+  path-filtering: circleci/path-filtering@0.0.2
 
 workflows:
-  version: 2
-  app1:
-    when: << pipeline.parameters.app1 >>
+  setup-workflow:
     jobs:
-      - job1
-  app2:
-    when: << pipeline.parameters.app2 >>
-    jobs:
-      - job2
+      # multiple configs for setup-workflow cause {"message":"Pipeline is not in setup state."} error
+      - path-filtering/filter:
+          config-path: .circleci/app1.yml
+          mapping: |
+            app1/.* app1 true
+#           base-revision: origin/master
+      - path-filtering/filter:
+          config-path: .circleci/app2.yml
+          mapping: |
+            app2/.* app2 true
+#           base-revision: origin/master
