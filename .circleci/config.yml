@@ -9,9 +9,14 @@ orbs:
 workflows:
   setup-workflow:
     jobs:
+      # multiple configs for setup-workflow cause {"message":"Pipeline is not in setup state."} error
       - path-filtering/filter:
-#           base-revision: origin/master
-          config-path: .circleci/setup-workflow-config.yml
+          config-path: .circleci/app1.yml
           mapping: |
             app1/.* app1 true
+          base-revision: origin/master
+      - path-filtering/filter:
+          config-path: .circleci/app2.yml
+          mapping: |
             app2/.* app2 true
+          base-revision: origin/master
