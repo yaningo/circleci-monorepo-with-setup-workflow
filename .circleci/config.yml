@@ -15,7 +15,7 @@ parameters:
   force-all:
     description: Emergency valve - forcibly build all the modules
     type: boolean
-    default: false
+    default: true
   custom-parameter:
     description: Some string to pass
     type: string
