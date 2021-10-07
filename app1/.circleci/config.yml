@@ -12,7 +12,7 @@ parameters:
 jobs:
   job1:
     docker: # executor type
-      - image: buildpack-deps:trusty # primary container will run Ubuntu Trusty
+      - image: buildpack-deps:trusty # primary container will run Ubuntu Trustyyyyyyyy
     steps:
       - run:
           name: list files
